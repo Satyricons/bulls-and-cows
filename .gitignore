@@ -1,0 +1,19 @@
+# Зависимости
+node_modules/
+
+# Скомпилированный код
+dist/
+
+# Логи
+*.log
+npm-debug.log*
+
+# Кэш тестов и покрытие
+coverage/
+.vitest/
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
