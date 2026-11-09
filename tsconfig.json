@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "outDir": "./dist",
+    "outDir": "./js",
     "rootDir": "./src",
     "sourceMap": true,
     "declaration": false
