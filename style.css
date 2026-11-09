@@ -1,0 +1,40 @@
+body {
+  font-family: sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+#root {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+}
+input,
+select,
+button {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.btn-secondary {
+  background: #6c757d;
+}
+.history {
+  list-style: none;
+  padding: 0;
+}
+.history-item {
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
