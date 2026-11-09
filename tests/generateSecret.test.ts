@@ -13,7 +13,7 @@ describe('generateSecret', () => {
   });
 
   it('содержит только допустимые для base символы', () => {
-    const secret = generateSecret(3, 2, Math.random);
+    const secret = generateSecret(2, 2, Math.random);
     expect([...secret].every((c) => '01'.includes(c))).toBe(true);
   });
 
