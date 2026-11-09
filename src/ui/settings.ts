@@ -5,17 +5,17 @@ export const renderSettings = (onStart: (length: number, base: number) => void):
   const title = createElement('h1', 'title', 'Bulls and Cows');
 
   const lengthLabel = createElement('label', 'label', 'Длина секрета: ');
-  const lengthSelect = createElement('select', 'select');
+  const lengthSelect = createElement('select', 'select') as HTMLSelectElement;
 
   // Добавляем варианты длины (2-6)
   [2, 3, 4, 5, 6].forEach((len) => {
-    const option = createElement('option', '', `${len}`);
+    const option = createElement('option', '', `${len}`) as HTMLOptionElement;
     option.value = `${len}`;
     lengthSelect.appendChild(option);
   });
 
   const baseLabel = createElement('label', 'label', 'Система счисления: ');
-  const baseSelect = createElement('select', 'select');
+  const baseSelect = createElement('select', 'select') as HTMLSelectElement;
 
   // Системы счисления
   const bases = [
@@ -26,7 +26,7 @@ export const renderSettings = (onStart: (length: number, base: number) => void):
   ];
 
   bases.forEach((b) => {
-    const option = createElement('option', '', b.label);
+    const option = createElement('option', '', b.label) as HTMLOptionElement;
     option.value = `${b.value}`;
     baseSelect.appendChild(option);
   });
@@ -49,8 +49,6 @@ export const renderSettings = (onStart: (length: number, base: number) => void):
     onStart(parseInt(lengthSelect.value, 10), parseInt(baseSelect.value, 10));
   });
 
-  container.append(title, createElement('div', 'form-group'), createElement('div', 'form-group'));
-
   // Собираем форму
   const group1 = createElement('div', 'form-group');
   group1.append(lengthLabel, lengthSelect);
@@ -58,7 +56,6 @@ export const renderSettings = (onStart: (length: number, base: number) => void):
   const group2 = createElement('div', 'form-group');
   group2.append(baseLabel, baseSelect);
 
-  container.innerHTML = ''; // Очищаем пустые div
   container.append(title, group1, group2, startBtn);
 
   return container;

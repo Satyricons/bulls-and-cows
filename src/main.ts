@@ -2,10 +2,14 @@ import { GameState } from './logic/state.js';
 import { generateSecret } from './logic/generateSecret.js';
 import { renderSettings } from './ui/settings.js';
 import { renderGame } from './ui/game.js';
-// В следующем шаге добавим рекорды
+import { renderLeaderboard } from './ui/leaderboard.js';
+import { loadRecords, saveRecords } from './storage/leaderboardStorage.js';
+import { addRecord } from './logic/leaderboard.js';
+import { createElement } from './ui/elements.js';
 
 const root = document.getElementById('root')!;
 let state: GameState | null = null;
+let currentRecords = loadRecords();
 
 const startGame = (length: number, base: number) => {
   state = {
@@ -24,18 +28,33 @@ const resetGame = () => {
   render();
 };
 
-const handleWin = (_attempts: number, _timeMs: number) => {
-  // Здесь будет сохранение рекордов
-  // TODO: сохранить рекорд в localStorage
+const handleWin = (attempts: number, timeMs: number) => {
+  if (!state) return;
+
+  const newRecord = {
+    length: state.length,
+    base: state.base,
+    attempts,
+    timeMs,
+    date: new Date().toISOString(),
+  };
+
+  currentRecords = addRecord(currentRecords, newRecord);
+  saveRecords(currentRecords);
 };
 
 const render = () => {
-  root.innerHTML = ''; // Очищаем root (это единственное допустимое использование, т.к. это статический контейнер)
+  root.innerHTML = ''; // Очищаем контейнер
+
+  const mainContainer = createElement('div', 'main-container');
 
   if (!state) {
-    root.appendChild(renderSettings(startGame));
+    // Экран настроек + таблица рекордов
+    mainContainer.appendChild(renderSettings(startGame));
+    mainContainer.appendChild(renderLeaderboard(currentRecords));
   } else {
-    root.appendChild(
+    // Игровой экран
+    mainContainer.appendChild(
       renderGame(
         state,
         (newState) => {
@@ -47,6 +66,8 @@ const render = () => {
       )
     );
   }
+
+  root.appendChild(mainContainer);
 };
 
 render();
